@@ -13,12 +13,10 @@ export default function Todos({ API_URL, refreshTrigger }) {
         fetchTodos();
     }, [refreshTrigger]);
 
-    // Add this function
     async function deleteTodo(todoId) {
         await fetch(`${API_URL}/todos/${todoId}`, {
             method: 'DELETE',
         });
-        // Refresh the list to show the todo is gone
         fetchTodos();
     }
 
@@ -37,7 +35,6 @@ export default function Todos({ API_URL, refreshTrigger }) {
                             <br />
                             {todo.description}
                         </div>
-                        {/* Add delete button */}
                         <button onClick={() => deleteTodo(todo.id)}>Delete</button>
                     </li>
                 ))}

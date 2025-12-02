@@ -1,3 +1,17 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.847);
+}
+
+header {
+    background-color: blue;
+    color: black;
+    padding: 10px;
+    text-align: center;
+}
+
 .todos-container {
     max-width: 600px;
     margin: 30px auto;

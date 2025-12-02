@@ -18,8 +18,8 @@ export default function App() {
                 <h1>TODO List</h1>
             </header>
             <main>
-                <Todos API_URL={API_URL} refreshTrigger={refreshTrigger} />  {/* Add prop */}
-                <CreateTodo API_URL={API_URL} onTodoCreated={refreshTodos} />  {/* Add prop */}
+                <Todos API_URL={API_URL} refreshTrigger={refreshTrigger} />  {' '} {/* Add prop */}
+                <CreateTodo API_URL={API_URL} onTodoCreated={refreshTodos} /> {' '} {/* Add prop */}
             </main>
         </>
     );
