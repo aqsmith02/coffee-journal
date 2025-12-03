@@ -1,13 +1,10 @@
 """
-Simple FastAPI Starter - TODO API
+Simple FastAPI Starter - Coffee Journal API
 ==================================
 
-This is a minimal FastAPI example, designed for beginners.
-It shows the basic structure of a REST API with database access.
-
 HOW IT WORKS:
-1. Client (your React app) makes a request to a URL (e.g., /todos)
-2. FastAPI finds the function decorated with @app.get("/todos")
+1. Client (your React app) makes a request to a URL (e.g., /coffee-entries)
+2. FastAPI finds the function decorated with @app.get("/coffee-entries")
 3. That function uses the database connection to query data
 4. The function returns data, which FastAPI converts to JSON
 5. The JSON is sent back to the client

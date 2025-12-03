@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Row, Col, Card, InputNumber, Select, DatePicker } from 'antd';
-import dayjs from 'dayjs';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -47,7 +46,6 @@ export default function CreateCoffeeEntry({ API_URL, onEntryCreated }) {
 
             if (response.ok || response.status === 201) {
                 onEntryCreated && onEntryCreated();
-                // Clear form
                 setCoffeeName('');
                 setRoaster('');
                 setOrigin('');

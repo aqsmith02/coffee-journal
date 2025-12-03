@@ -11,7 +11,7 @@ export default function CoffeeEntries({ API_URL, refreshTrigger }) {
         try {
             const response = await fetch(`${API_URL}/coffee-entries`);
             const data = await response.json();
-            setEntries(data.reverse()); // newest first
+            setEntries(data.reverse());
         } catch (err) {
             console.error('Fetch entries error', err);
         } finally {
