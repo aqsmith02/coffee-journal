@@ -1,32 +1,41 @@
-import React, { useState } from 'react'; // Add useState
+import React, { useState } from 'react';
+import { ConfigProvider } from 'antd';
 import './globals.css';
-import Todos from './Todos';
-import CreateTodo from './CreateTodo';
+import CoffeeEntries from './CoffeeEntries';
+import CreateCoffeeEntry from './CreateCoffeeEntry';
 
 const API_URL = 'http://localhost:8000';
 
-export default function App() {
-    const [refreshTrigger, setRefreshTrigger] = useState(0); // Add this
+const theme = {
+  token: {
+    colorPrimary: '#8B4513',
+    colorSuccess: '#52c41a',
+    colorWarning: '#faad14',
+    colorError: '#ff4d4f',
+    fontSize: 14,
+    borderRadius: 6,
+  },
+};
 
-    function refreshTodos() {
-        // Add this function
+export default function App() {
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+    function refreshCoffeeEntries() {
         setRefreshTrigger((prev) => prev + 1);
     }
 
     return (
-        <>
+        <ConfigProvider theme={theme}>
             <header>
-                <h1>TODO List</h1>
+                <h1>☕ Coffee Journal</h1>
             </header>
             <main>
-                <Todos API_URL={API_URL} refreshTrigger={refreshTrigger} />{' '}
-                {/* Add prop */}
-                <CreateTodo
+                <CreateCoffeeEntry
                     API_URL={API_URL}
-                    onTodoCreated={refreshTodos}
-                />{' '}
-                {/* Add prop */}
+                    onEntryCreated={refreshCoffeeEntries}
+                />
+                <CoffeeEntries API_URL={API_URL} refreshTrigger={refreshTrigger} />
             </main>
-        </>
+        </ConfigProvider>
     );
 }

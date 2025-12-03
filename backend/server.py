@@ -78,6 +78,7 @@ class CoffeeEntryBase(BaseModel):
     coffee_name: str
     roaster: Optional[str] = None
     origin: Optional[str] = None
+    processing: Optional[str] = None
     roast_level: Optional[str] = None
     brewing_method: Optional[str] = None
     rating: Optional[float] = None
@@ -97,6 +98,7 @@ class CoffeeEntryUpdate(BaseModel):
     coffee_name: Optional[str] = None
     roaster: Optional[str] = None
     origin: Optional[str] = None
+    processing: Optional[str] = None
     roast_level: Optional[str] = None
     brewing_method: Optional[str] = None
     rating: Optional[float] = None
@@ -200,6 +202,7 @@ async def create_coffee_entry(entry: CoffeeEntryCreate, db: AsyncSession = Depen
         coffee_name=entry.coffee_name,
         roaster=entry.roaster,
         origin=entry.origin,
+        processing=entry.processing,
         roast_level=entry.roast_level,
         brewing_method=entry.brewing_method,
         rating=entry.rating,

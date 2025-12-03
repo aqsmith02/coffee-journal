@@ -12,6 +12,7 @@ class CoffeeEntry(Base):
     coffee_name = Column(String, nullable=False)
     roaster = Column(String, nullable=True)
     origin = Column(String, nullable=True)
+    processing = Column(String, nullable=True)
     roast_level = Column(String, nullable=True)
     brewing_method = Column(String, nullable=True)
     rating = Column(Float, nullable=True)
