@@ -3,11 +3,30 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgba(245, 235, 235, 0.847);
+    min-height: 100vh;
 }
 
 header {
     background-color: rgb(111, 86, 68);
     color: rgb(246, 238, 238);
-    padding: 10px;
+    padding: 20px;
     text-align: center;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.form-container,
+.coffee-entries-container {
+    margin-bottom: 40px;
+}
+
+.side-note {
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+    margin-top: 10px;
 }
