@@ -167,6 +167,19 @@ export default function CreateCoffeeEntry({ API_URL, onEntryCreated }) {
                             />
                         </Form.Item>
                     </Col>
+
+                    <Col span={12}>
+                        <Form.Item label="Rating (1-10)">
+                            <InputNumber
+                                value={rating}
+                                onChange={setRating}
+                                min={1}
+                                max={10}
+                                step={0.5}
+                                placeholder="e.g., 8.5"
+                            />
+                        </Form.Item>
+                    </Col>
                 </Row>
 
                 <Form.Item label="Tasting Notes">
