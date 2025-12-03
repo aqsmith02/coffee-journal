@@ -1,4 +1,4 @@
 from .base import Base
-from .hand import PokerHand
+from .coffee_entry import CoffeeEntry
 
-__all__ = ["Base", "PokerHand"]
+__all__ = ["Base", "CoffeeEntry"]

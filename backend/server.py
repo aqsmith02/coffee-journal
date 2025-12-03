@@ -28,7 +28,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.future import select
 from sqlalchemy.orm import sessionmaker
 
-from models import Base, Todo
+from models import Base, CoffeeEntry
 
 # Step 2: Load environment variables from .env file
 # Looks for .env file in current directory and parent directories
@@ -72,44 +72,52 @@ async def get_db():
 # They define the structure of data that will be sent to and from the API
 
 
-class TodoBase(BaseModel):
-    """Base schema with common fields for todos"""
+class CoffeeEntryBase(BaseModel):
+    """Base schema with common fields for coffee entries"""
 
-    title: str
-    description: Optional[str] = None
-    completed: bool = False
+    coffee_name: str
+    roaster: Optional[str] = None
+    origin: Optional[str] = None
+    roast_level: Optional[str] = None
+    brewing_method: Optional[str] = None
+    rating: Optional[float] = None
+    tasting_notes: Optional[str] = None
+    date_tried: Optional[datetime] = None
 
 
-class TodoCreate(TodoBase):
-    """Schema for creating a new todo"""
+class CoffeeEntryCreate(CoffeeEntryBase):
+    """Schema for creating a new coffee entry"""
 
     pass
 
 
-class TodoUpdate(BaseModel):
-    """Schema for updating a todo - all fields optional"""
+class CoffeeEntryUpdate(BaseModel):
+    """Schema for updating a coffee entry - all fields optional"""
 
-    title: Optional[str] = None
-    description: Optional[str] = None
-    completed: Optional[bool] = None
+    coffee_name: Optional[str] = None
+    roaster: Optional[str] = None
+    origin: Optional[str] = None
+    roast_level: Optional[str] = None
+    brewing_method: Optional[str] = None
+    rating: Optional[float] = None
+    tasting_notes: Optional[str] = None
+    date_tried: Optional[datetime] = None
 
 
-class TodoResponse(TodoBase):
-    """What a todo looks like when we send it back to the client"""
+class CoffeeEntryResponse(CoffeeEntryBase):
+    """What a coffee entry looks like when we send it back to the client"""
 
     id: int
-    created_at: datetime
-    updated_at: datetime
 
     # This tells Pydantic to automatically convert SQLAlchemy models
-    # (like our Todo model) into this Pydantic model
+    # (like our CoffeeEntry model) into this Pydantic model
     class Config:
         from_attributes = True
 
 
 # Step 6: Create the FastAPI app
 # This is the main application object - it handles all incoming requests
-app = FastAPI(title="TODO API", description="A simple CRUD API for managing TODO items")
+app = FastAPI(title="Coffee Journal API", description="A simple CRUD API for logging and tracking coffee entries")
 
 
 # Step 7: Create database tables on startup
@@ -127,7 +135,7 @@ async def create_tables():
     async with engine.begin() as conn:
         # Use run_sync to run the synchronous create_all method
         await conn.run_sync(Base.metadata.create_all)
-    print("✅ Database tables created successfully")
+    print("Database tables created successfully")
 
 
 # Step 8: Add CORS middleware to allow frontend requests
@@ -149,112 +157,112 @@ app.add_middleware(
 # IMPORTANT: API routes must be defined BEFORE the SPA catch-all route
 
 
-# READ: Get all todos
-@app.get("/todos", response_model=List[TodoResponse])
-async def get_all_todos(db: AsyncSession = Depends(get_db)):
+# READ: Get all coffee entries
+@app.get("/coffee-entries", response_model=List[CoffeeEntryResponse])
+async def get_all_coffee_entries(db: AsyncSession = Depends(get_db)):
     """
-    Get all todos from the database.
+    Get all coffee entries from the database.
 
-    Returns: A list of all todos in the database
+    Returns: A list of all coffee entries in the database
     """
-    result = await db.execute(select(Todo))
-    todos = result.scalars().all()
-    return todos
+    result = await db.execute(select(CoffeeEntry))
+    entries = result.scalars().all()
+    return entries
 
 
-# READ: Get a single todo by ID
-@app.get("/todos/{todo_id}", response_model=TodoResponse)
-async def get_todo(todo_id: int, db: AsyncSession = Depends(get_db)):
+# READ: Get a single coffee entry by ID
+@app.get("/coffee-entries/{entry_id}", response_model=CoffeeEntryResponse)
+async def get_coffee_entry(entry_id: int, db: AsyncSession = Depends(get_db)):
     """
-    Get a single todo by its ID.
+    Get a single coffee entry by its ID.
 
-    Returns: The todo if found, or a 404 error if not
+    Returns: The coffee entry if found, or a 404 error if not
     """
-    result = await db.execute(select(Todo).where(Todo.id == todo_id))
-    todo = result.scalar_one_or_none()
+    result = await db.execute(select(CoffeeEntry).where(CoffeeEntry.id == entry_id))
+    entry = result.scalar_one_or_none()
 
-    if todo is None:
-        raise HTTPException(status_code=404, detail=f"Todo with ID {todo_id} not found")
+    if entry is None:
+        raise HTTPException(status_code=404, detail=f"Coffee entry with ID {entry_id} not found")
 
-    return todo
+    return entry
 
 
-# Step 10:
-# CREATE: Create a new todo
-@app.post("/todos", response_model=TodoResponse, status_code=201)
-async def create_todo(todo: TodoCreate, db: AsyncSession = Depends(get_db)):
+# CREATE: Create a new coffee entry
+@app.post("/coffee-entries", response_model=CoffeeEntryResponse, status_code=201)
+async def create_coffee_entry(entry: CoffeeEntryCreate, db: AsyncSession = Depends(get_db)):
     """
-    Create a new todo item.
+    Create a new coffee entry.
 
-    Returns: The created todo
+    Returns: The created coffee entry
     """
-    # Create a new Todo object from the request data
-    db_todo = Todo(
-        title=todo.title,
-        description=todo.description,
-        completed=todo.completed,
+    # Create a new CoffeeEntry object from the request data
+    db_entry = CoffeeEntry(
+        coffee_name=entry.coffee_name,
+        roaster=entry.roaster,
+        origin=entry.origin,
+        roast_level=entry.roast_level,
+        brewing_method=entry.brewing_method,
+        rating=entry.rating,
+        tasting_notes=entry.tasting_notes,
+        date_tried=entry.date_tried,
     )
 
     # Add it to the database session
-    db.add(db_todo)
+    db.add(db_entry)
     # Commit the transaction to save it
     await db.commit()
     # Refresh to get the updated data (like the generated ID)
-    await db.refresh(db_todo)
+    await db.refresh(db_entry)
 
-    return db_todo
+    return db_entry
 
 
-# Step 11:
-# UPDATE: Update an existing todo (PATCH - partial update)
-@app.patch("/todos/{todo_id}", response_model=TodoResponse)
-async def patch_todo(
-    todo_id: int, todo_update: TodoUpdate, db: AsyncSession = Depends(get_db)
+# UPDATE: Update an existing coffee entry (PATCH - partial update)
+@app.patch("/coffee-entries/{entry_id}", response_model=CoffeeEntryResponse)
+async def patch_coffee_entry(
+    entry_id: int, entry_update: CoffeeEntryUpdate, db: AsyncSession = Depends(get_db)
 ):
     """
-    Partially update an existing todo item (PATCH).
+    Partially update an existing coffee entry (PATCH).
     Only the fields provided in the request will be updated.
-    Returns: The updated todo, or a 404 error if not found
+    Returns: The updated coffee entry, or a 404 error if not found
     """
-    # Get the existing todo
-    result = await db.execute(select(Todo).where(Todo.id == todo_id))
-    db_todo = result.scalar_one_or_none()
+    # Get the existing coffee entry
+    result = await db.execute(select(CoffeeEntry).where(CoffeeEntry.id == entry_id))
+    db_entry = result.scalar_one_or_none()
 
-    if db_todo is None:
-        raise HTTPException(status_code=404, detail=f"Todo with ID {todo_id} not found")
+    if db_entry is None:
+        raise HTTPException(status_code=404, detail=f"Coffee entry with ID {entry_id} not found")
 
     # Update only the fields that were provided
-    update_data = todo_update.model_dump(exclude_unset=True)
+    update_data = entry_update.model_dump(exclude_unset=True)
     for field, value in update_data.items():
-        setattr(db_todo, field, value)
-
-    # Update the updated_at timestamp
-    db_todo.updated_at = datetime.utcnow()
+        setattr(db_entry, field, value)
 
     # Commit the changes
     await db.commit()
-    await db.refresh(db_todo)
+    await db.refresh(db_entry)
 
-    return db_todo
+    return db_entry
 
 
-# Step 12: DELETE: Delete a todo
-@app.delete("/todos/{todo_id}", status_code=204)
-async def delete_todo(todo_id: int, db: AsyncSession = Depends(get_db)):
+# DELETE: Delete a coffee entry
+@app.delete("/coffee-entries/{entry_id}", status_code=204)
+async def delete_coffee_entry(entry_id: int, db: AsyncSession = Depends(get_db)):
     """
-    Delete a todo item.
+    Delete a coffee entry.
 
     Returns: 204 No Content if successful, or a 404 error if not found
     """
-    # Get the existing todo
-    result = await db.execute(select(Todo).where(Todo.id == todo_id))
-    db_todo = result.scalar_one_or_none()
+    # Get the existing coffee entry
+    result = await db.execute(select(CoffeeEntry).where(CoffeeEntry.id == entry_id))
+    db_entry = result.scalar_one_or_none()
 
-    if db_todo is None:
-        raise HTTPException(status_code=404, detail=f"Todo with ID {todo_id} not found")
+    if db_entry is None:
+        raise HTTPException(status_code=404, detail=f"Coffee entry with ID {entry_id} not found")
 
     # Delete it from the database
-    await db.delete(db_todo)
+    await db.delete(db_entry)
     await db.commit()
 
     return None
