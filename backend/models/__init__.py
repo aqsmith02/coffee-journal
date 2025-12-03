@@ -1,4 +1,4 @@
 from .base import Base
-from .todo import Todo
+from .hand import PokerHand
 
-__all__ = ["Base", "Todo"]
+__all__ = ["Base", "PokerHand"]
