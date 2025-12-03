@@ -78,7 +78,7 @@ export default function CreateCoffeeEntry({ API_URL, onEntryCreated }) {
                             <Input
                                 value={coffeeName}
                                 onChange={(e) => setCoffeeName(e.target.value)}
-                                placeholder="e.g., Ethiopian Yirgacheffe"
+                                placeholder="e.g., Ethiopian Keramo"
                             />
                         </Form.Item>
                     </Col>
@@ -88,7 +88,7 @@ export default function CreateCoffeeEntry({ API_URL, onEntryCreated }) {
                             <Input
                                 value={roaster}
                                 onChange={(e) => setRoaster(e.target.value)}
-                                placeholder="e.g., Blue Bottle"
+                                placeholder="e.g., Rowan"
                             />
                         </Form.Item>
                     </Col>
@@ -100,7 +100,7 @@ export default function CreateCoffeeEntry({ API_URL, onEntryCreated }) {
                             <Input
                                 value={origin}
                                 onChange={(e) => setOrigin(e.target.value)}
-                                placeholder="e.g., Ethiopia, Washed"
+                                placeholder="e.g., Ethiopia"
                             />
                         </Form.Item>
                     </Col>

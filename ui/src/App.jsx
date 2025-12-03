@@ -8,7 +8,7 @@ const API_URL = 'http://localhost:8000';
 
 const theme = {
   token: {
-    colorPrimary: '#8B4513',
+    colorPrimary: '#6f5644',
     colorSuccess: '#52c41a',
     colorWarning: '#faad14',
     colorError: '#ff4d4f',

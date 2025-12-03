@@ -67,7 +67,7 @@ export default function CoffeeEntries({ API_URL, refreshTrigger }) {
                                     <div>
                                         <strong>{entry.coffee_name}</strong>
                                         {entry.rating && (
-                                            <span style={{ marginLeft: 12, color: '#8b5a3c', fontWeight: 'bold' }}>
+                                            <span style={{ marginLeft: 12, color: '#111111ff', fontWeight: 'bold' }}>
                                                 {entry.rating}/10
                                             </span>
                                         )}
@@ -78,27 +78,27 @@ export default function CoffeeEntries({ API_URL, refreshTrigger }) {
                                         <Row gutter={[12, 8]}>
                                             {entry.roaster && (
                                                 <Col>
-                                                    <Tag>Roaster: {entry.roaster}</Tag>
+                                                    <Tag color="gray">Roaster: {entry.roaster}</Tag>
                                                 </Col>
                                             )}
                                             {entry.origin && (
                                                 <Col>
-                                                    <Tag color="geekblue">Origin: {entry.origin}</Tag>
+                                                    <Tag color="gray">Origin: {entry.origin}</Tag>
                                                 </Col>
                                             )}
                                             {entry.processing && (
                                                 <Col>
-                                                    <Tag color="purple">Process: {entry.processing}</Tag>
+                                                    <Tag color="gray">Process: {entry.processing}</Tag>
                                                 </Col>
                                             )}
                                             {entry.roast_level && (
                                                 <Col>
-                                                    <Tag color="volcano">Roast: {entry.roast_level}</Tag>
+                                                    <Tag color="gray">Roast: {entry.roast_level}</Tag>
                                                 </Col>
                                             )}
                                             {entry.brewing_method && (
                                                 <Col>
-                                                    <Tag color="cyan">Method: {entry.brewing_method}</Tag>
+                                                    <Tag color="gray">Method: {entry.brewing_method}</Tag>
                                                 </Col>
                                             )}
                                         </Row>
