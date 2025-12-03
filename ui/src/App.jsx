@@ -14,6 +14,7 @@ const theme = {
     colorError: '#ff4d4f',
     fontSize: 14,
     borderRadius: 6,
+    fontFamily: "'Playfair Display', 'Georgia', 'Garamond', serif",
   },
 };
 
