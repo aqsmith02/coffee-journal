@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, List, Button, Tag, Spin, Rate, Space, Empty, Row, Col } from 'antd';
+import { Card, List, Button, Tag, Spin, Space, Empty, Row, Col } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
 export default function CoffeeEntries({ API_URL, refreshTrigger }) {
@@ -67,12 +67,9 @@ export default function CoffeeEntries({ API_URL, refreshTrigger }) {
                                     <div>
                                         <strong>{entry.coffee_name}</strong>
                                         {entry.rating && (
-                                            <Rate
-                                                value={entry.rating}
-                                                disabled
-                                                style={{ marginLeft: 12 }}
-                                                allowHalf
-                                            />
+                                            <span style={{ marginLeft: 12, color: '#8b5a3c', fontWeight: 'bold' }}>
+                                                {entry.rating}/10
+                                            </span>
                                         )}
                                     </div>
                                 }

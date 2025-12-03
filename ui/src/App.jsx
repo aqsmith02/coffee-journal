@@ -27,7 +27,7 @@ export default function App() {
     return (
         <ConfigProvider theme={theme}>
             <header>
-                <h1>☕ Coffee Journal</h1>
+                <h1>Coffee Journal</h1>
             </header>
             <main>
                 <CreateCoffeeEntry
