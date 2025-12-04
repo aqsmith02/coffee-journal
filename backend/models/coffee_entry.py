@@ -15,4 +15,5 @@ class CoffeeEntry(Base):
     brewing_method = Column(String, nullable=True)
     rating = Column(Float, nullable=True)
     tasting_notes = Column(String, nullable=True)
-    date_tried = Column(DateTime, nullable=True)
+    date_tried = Column(DateTime(timezone=True), nullable=True)
+
