@@ -1,4 +1,4 @@
 from .base import Base
-from .todo import Todo
+from .coffee_entry import CoffeeEntry
 
-__all__ = ["Base", "Todo"]
+__all__ = ["Base", "CoffeeEntry"]
