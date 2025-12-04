@@ -9,8 +9,8 @@ import CreateCoffeeEntry from './CreateCoffeeEntry';
 // Check if VITE_API_URL is explicitly set (even if empty string), otherwise use localhost
 const API_URL =
     import.meta.env.VITE_API_URL !== undefined
-        ? import.meta.env.VITE_API_URL      // address for production architecture
-        : 'http://localhost:8000';          // address for local architecture
+        ? import.meta.env.VITE_API_URL // address for production architecture
+        : 'http://localhost:8000'; // address for local architecture
 
 const theme = {
     token: {
