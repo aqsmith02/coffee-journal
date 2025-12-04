@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Row, Col, Card, InputNumber, Select, DatePicker } from 'antd';
+import {
+    Form,
+    Input,
+    Button,
+    Row,
+    Col,
+    Card,
+    InputNumber,
+    Select,
+    DatePicker,
+} from 'antd';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -147,7 +157,9 @@ export default function CreateCoffeeEntry({ API_URL, onEntryCreated }) {
                             >
                                 <Option value="Espresso">Espresso</Option>
                                 <Option value="Pour Over">Pour Over</Option>
-                                <Option value="French Press">French Press</Option>
+                                <Option value="French Press">
+                                    French Press
+                                </Option>
                                 <Option value="AeroPress">AeroPress</Option>
                                 <Option value="Chemex">Chemex</Option>
                                 <Option value="Cold Brew">Cold Brew</Option>

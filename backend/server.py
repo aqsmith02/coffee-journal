@@ -116,7 +116,10 @@ class CoffeeEntryResponse(CoffeeEntryBase):
 
 # Step 6: Create the FastAPI app
 # This is the main application object - it handles all incoming requests
-app = FastAPI(title="Coffee Journal API", description="A simple CRUD API for logging and tracking coffee entries")
+app = FastAPI(
+    title="Coffee Journal API",
+    description="A simple CRUD API for logging and tracking coffee entries",
+)
 
 
 # Step 7: Create database tables on startup
@@ -181,14 +184,18 @@ async def get_coffee_entry(entry_id: int, db: AsyncSession = Depends(get_db)):
     entry = result.scalar_one_or_none()
 
     if entry is None:
-        raise HTTPException(status_code=404, detail=f"Coffee entry with ID {entry_id} not found")
+        raise HTTPException(
+            status_code=404, detail=f"Coffee entry with ID {entry_id} not found"
+        )
 
     return entry
 
 
 # CREATE: Create a new coffee entry
 @app.post("/coffee-entries", response_model=CoffeeEntryResponse, status_code=201)
-async def create_coffee_entry(entry: CoffeeEntryCreate, db: AsyncSession = Depends(get_db)):
+async def create_coffee_entry(
+    entry: CoffeeEntryCreate, db: AsyncSession = Depends(get_db)
+):
     """
     Create a new coffee entry.
 
@@ -232,7 +239,9 @@ async def patch_coffee_entry(
     db_entry = result.scalar_one_or_none()
 
     if db_entry is None:
-        raise HTTPException(status_code=404, detail=f"Coffee entry with ID {entry_id} not found")
+        raise HTTPException(
+            status_code=404, detail=f"Coffee entry with ID {entry_id} not found"
+        )
 
     # Update only the fields that were provided
     update_data = entry_update.model_dump(exclude_unset=True)
@@ -259,7 +268,9 @@ async def delete_coffee_entry(entry_id: int, db: AsyncSession = Depends(get_db))
     db_entry = result.scalar_one_or_none()
 
     if db_entry is None:
-        raise HTTPException(status_code=404, detail=f"Coffee entry with ID {entry_id} not found")
+        raise HTTPException(
+            status_code=404, detail=f"Coffee entry with ID {entry_id} not found"
+        )
 
     # Delete it from the database
     await db.delete(db_entry)

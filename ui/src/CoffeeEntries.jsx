@@ -26,7 +26,7 @@ export default function CoffeeEntries({ API_URL, refreshTrigger }) {
     async function deleteEntry(entryId) {
         if (!confirm('Delete this coffee entry?')) return;
         const prev = entries;
-        setEntries(prev.filter(e => e.id !== entryId));
+        setEntries(prev.filter((e) => e.id !== entryId));
         try {
             const res = await fetch(`${API_URL}/coffee-entries/${entryId}`, {
                 method: 'DELETE',
@@ -67,7 +67,13 @@ export default function CoffeeEntries({ API_URL, refreshTrigger }) {
                                     <div>
                                         <strong>{entry.coffee_name}</strong>
                                         {entry.rating && (
-                                            <span style={{ marginLeft: 12, color: '#111111ff', fontWeight: 'bold' }}>
+                                            <span
+                                                style={{
+                                                    marginLeft: 12,
+                                                    color: '#111111ff',
+                                                    fontWeight: 'bold',
+                                                }}
+                                            >
                                                 {entry.rating}/10
                                             </span>
                                         )}
@@ -78,38 +84,67 @@ export default function CoffeeEntries({ API_URL, refreshTrigger }) {
                                         <Row gutter={[12, 8]}>
                                             {entry.roaster && (
                                                 <Col>
-                                                    <Tag color="gray">Roaster: {entry.roaster}</Tag>
+                                                    <Tag color="gray">
+                                                        Roaster: {entry.roaster}
+                                                    </Tag>
                                                 </Col>
                                             )}
                                             {entry.origin && (
                                                 <Col>
-                                                    <Tag color="gray">Origin: {entry.origin}</Tag>
+                                                    <Tag color="gray">
+                                                        Origin: {entry.origin}
+                                                    </Tag>
                                                 </Col>
                                             )}
                                             {entry.processing && (
                                                 <Col>
-                                                    <Tag color="gray">Process: {entry.processing}</Tag>
+                                                    <Tag color="gray">
+                                                        Process:{' '}
+                                                        {entry.processing}
+                                                    </Tag>
                                                 </Col>
                                             )}
                                             {entry.roast_level && (
                                                 <Col>
-                                                    <Tag color="gray">Roast: {entry.roast_level}</Tag>
+                                                    <Tag color="gray">
+                                                        Roast:{' '}
+                                                        {entry.roast_level}
+                                                    </Tag>
                                                 </Col>
                                             )}
                                             {entry.brewing_method && (
                                                 <Col>
-                                                    <Tag color="gray">Method: {entry.brewing_method}</Tag>
+                                                    <Tag color="gray">
+                                                        Method:{' '}
+                                                        {entry.brewing_method}
+                                                    </Tag>
                                                 </Col>
                                             )}
                                         </Row>
                                         {entry.tasting_notes && (
-                                            <div style={{ marginTop: 8, fontSize: 13, color: '#666' }}>
-                                                <strong>Notes:</strong> {entry.tasting_notes}
+                                            <div
+                                                style={{
+                                                    marginTop: 8,
+                                                    fontSize: 13,
+                                                    color: '#666',
+                                                }}
+                                            >
+                                                <strong>Notes:</strong>{' '}
+                                                {entry.tasting_notes}
                                             </div>
                                         )}
                                         {entry.date_tried && (
-                                            <div style={{ marginTop: 4, fontSize: 12, color: '#999' }}>
-                                                Tried: {new Date(entry.date_tried).toLocaleDateString()}
+                                            <div
+                                                style={{
+                                                    marginTop: 4,
+                                                    fontSize: 12,
+                                                    color: '#999',
+                                                }}
+                                            >
+                                                Tried:{' '}
+                                                {new Date(
+                                                    entry.date_tried
+                                                ).toLocaleDateString()}
                                             </div>
                                         )}
                                     </div>

@@ -7,15 +7,15 @@ import CreateCoffeeEntry from './CreateCoffeeEntry';
 const API_URL = 'http://localhost:8000';
 
 const theme = {
-  token: {
-    colorPrimary: '#6f5644',
-    colorSuccess: '#52c41a',
-    colorWarning: '#faad14',
-    colorError: '#ff4d4f',
-    fontSize: 14,
-    borderRadius: 6,
-    fontFamily: "'Playfair Display', 'Georgia', 'Garamond', serif",
-  },
+    token: {
+        colorPrimary: '#6f5644',
+        colorSuccess: '#52c41a',
+        colorWarning: '#faad14',
+        colorError: '#ff4d4f',
+        fontSize: 14,
+        borderRadius: 6,
+        fontFamily: "'Playfair Display', 'Georgia', 'Garamond', serif",
+    },
 };
 
 export default function App() {
@@ -35,7 +35,10 @@ export default function App() {
                     API_URL={API_URL}
                     onEntryCreated={refreshCoffeeEntries}
                 />
-                <CoffeeEntries API_URL={API_URL} refreshTrigger={refreshTrigger} />
+                <CoffeeEntries
+                    API_URL={API_URL}
+                    refreshTrigger={refreshTrigger}
+                />
             </main>
         </ConfigProvider>
     );
