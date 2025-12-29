@@ -25,3 +25,7 @@ A full-stack web application built with FastAPI (backend), React (frontend), and
    - Frontend: http://localhost:5173
    - Backend API: http://localhost:8000
    - API Documentation: http://localhost:8000/docs
+
+## Author
+
+Andrew Smith
